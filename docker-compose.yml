@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  sample-grpc-db:
+    container_name: sample-grpc-db
+    image: postgres:12.8
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=golang
+    ports:
+      - 5432:5432
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
