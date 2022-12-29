@@ -8,15 +8,51 @@ message User {
   uint64 id = 1;
   string name = 2;
   uint64 age = 3;
+  string email = 4;
+  string password = 5;
+  string phone = 6;
+
 }
 
 message CreateUserRequest {
   string name = 1;
   uint64 age = 2;
+  string email = 4;
+  string password = 5;
+  string phone = 6;
+}
+
+message GetUserByIdRequest {
+  uint64 id = 1;
+}
+
+message GetUsersRequest {
+}
+
+message ListUser {
+  repeated User users = 1;
+}
+
+message UpdateUserByIdRequest {
+  uint64 id = 1;
+  string name = 2;
+  uint64 age = 3;
+  string phone = 5;
+}
+
+message DeleteUserByIdRequest {
+  uint64 id = 1;
+}
+message DeleteUserByIdResponse {
+  bool result = 1;
 }
 
 service UserService {
   rpc CreateUser(CreateUserRequest) returns (User) {};
+  rpc GetUserById(GetUserByIdRequest) returns (User) {};
+  rpc GetUsers(GetUsersRequest) returns (ListUser) {};
+  rpc UpdateUserById(UpdateUserByIdRequest) returns (User) {};
+  rpc DeleteUserById(DeleteUserByIdRequest) returns (DeleteUserByIdResponse) {};
 }
 
 
