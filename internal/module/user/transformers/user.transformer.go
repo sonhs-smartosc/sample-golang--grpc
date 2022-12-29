@@ -21,11 +21,35 @@ func NewUserTransformer() *UserTransformer {
 //	return result, err
 //}
 
-func (transformer *UserTransformer) CreateUserRequestPbToDto(data *pb.CreateUserRequest) (result *dto.User, err error) {
+func (transformer *UserTransformer) CreateUserRequestPbToDto(data *pb.CreateUserRequest) (result *dto.CreateUserRequest, err error) {
 
-	result = &dto.User{
-		Name: strings.Trim(data.Name, " "),
-		Age:  data.Age,
+	result = &dto.CreateUserRequest{
+		Name:     strings.Trim(data.Name, " "),
+		Age:      data.Age,
+		Email:    data.Email,
+		Password: data.Password,
+		Phone:    data.Phone,
 	}
 	return result, err
+}
+
+func (transformer *UserTransformer) UserDtoToPb(data *dto.User) (result *pb.User) {
+	result = &pb.User{
+		Id:    data.Id,
+		Name:  data.Name,
+		Age:   data.Age,
+		Email: data.Email,
+		Phone: data.Phone,
+	}
+	return result
+}
+
+func (transformer *UserTransformer) UpdateUserPbToDto(data *pb.UpdateUserByIdRequest) (result *dto.UpdateUserByIdRequest, err error) {
+	result = &dto.UpdateUserByIdRequest{
+		Id:    data.Id,
+		Name:  data.Name,
+		Age:   data.Age,
+		Phone: data.Phone,
+	}
+	return result, nil
 }
